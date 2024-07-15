@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <title>Search Dishes</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 30px;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 600px;
+        text-align: center;
+      }
+
+      h1 {
+        color: #333;
+        margin-bottom: 20px;
+      }
+
+      form {
+        margin-bottom: 20px;
+      }
+
+      input[type="text"] {
+        width: calc(100% - 90px);
+        padding: 10px;
+        border: 3px solid #ddd;
+        border-radius: 4px;
+      }
+
+      .button .btn {
+        font-size: 14px;
+        padding: 13px 30px;
+        background-color: #0167f3;
+        color: #fff;
+        border: 4px;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 20px;
+      }
+
+      .results {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .btn:hover {
+        color: #212529;
+      }
+
+      h2 {
+        color: #555;
+        margin-top: 20px;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      li {
+        background-color: #fafafa;
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+        text-align: bottom;
+      }
+
+      li:nth-child(odd) {
+        background-color: #f1f1f1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Search for a Dish</h1>
+      <form method="GET" action="{% url 'search' %}">
+        <input
+          type="text"
+          name="q"
+          placeholder="Enter dish name"
+          value="{{ query|default:"" }}"
+        />
+
+        <div class="button mb-4">
+          <button type="submit" class="btn">Search</button>
+        </div>
+      </form>
+
+      {% if dishes %}
+      <h2>Results for "{{ query }}":</h2>
+      <ul>
+        {% for dish in dishes %}
+        <li>{{ dish.name }} - {{ dish.location }}</li>
+        {% endfor %}
+      </ul>
+      {% else %} {% if query %}
+      <li>No results found for "{{ query }}".</li>
+      {% endif %} {% endif %}
+    </div>
+  </body>
+</html>
