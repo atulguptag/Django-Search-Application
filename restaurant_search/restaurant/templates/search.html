@@ -115,9 +115,9 @@
         <li>{{ dish.name }} - {{ dish.location }}</li>
         {% endfor %}
       </ul>
-      {% else %} {% if query %}
-      <li>No results found for "{{ query }}".</li>
-      {% endif %} {% endif %}
+      {% elif query %}
+      <p>No results found for "{{ query }}".</p>
+      {% endif %}
     </div>
   </body>
 </html>
