@@ -12,7 +12,7 @@ def search(request):
     query = request.GET.get('q', '')
     if query:
         dishes = Dish.objects.filter(Q(name__icontains=query) | Q(
-            name__istartswith=query)).distinct()[:10]
+            name__istartswith=query)).distinct()[:10]  # Here, distinct() function will remove the duplicate values in the results and [:10] this will validate only 10 search items.
     else:
         dishes = Dish.objects.none()
     context = {'query': query, 'dishes': dishes}
